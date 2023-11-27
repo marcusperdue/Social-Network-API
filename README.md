@@ -3,4 +3,6 @@ API for a social network web application where users can share their thoughts, r
 
 npm init -y
 npm install express mongoose
+npm install express
+
 touch .gitignore
