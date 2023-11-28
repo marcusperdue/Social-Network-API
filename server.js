@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const apiRoutes = require('./routes');
 const db = require('./config/connection');
+const { User, Thought, Reaction } = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,6 +13,7 @@ app.use('/api', apiRoutes);
 mongoose.connect('mongodb://localhost/social-network', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+   
 });
 
 mongoose.connection.on('error', (err) => {
