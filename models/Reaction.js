@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
+function dateFormat(timestamp) {
+  
+  return timestamp.toLocaleString(); 
+}
+
 const reactionSchema = new mongoose.Schema({
   reactionBody: {
     type: String,
     required: true,
-    maxLength: 280,
+    maxlength: 280, // Use maxlength, not maxLength
   },
   username: {
     type: String,
@@ -13,7 +18,7 @@ const reactionSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
+    get: (timestamp) => dateFormat(timestamp), // Implement the dateFormat function
   },
 });
 
