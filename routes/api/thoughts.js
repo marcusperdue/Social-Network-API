@@ -1,13 +1,19 @@
 const router = require('express').Router();
 const { Thought } = require('../../models');
 
+// Error handling middleware
+const handleErrors = (res, error) => {
+  console.error(error);
+  res.status(500).json({ success: false, error: 'Internal server error' });
+};
+
+// GET all thoughts
 router.get('/thoughts', async (req, res) => {
   try {
     const thoughts = await Thought.find();
-    res.json(thoughts);
+    res.json({ success: true, data: thoughts });
   } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
+    handleErrors(res, error);
   }
 });
 
@@ -70,33 +76,34 @@ router.put('/thoughts/:thoughtId', async (req, res) => {
   }
 });
 
+
 // DELETE to remove a thought by its _id
 router.delete('/thoughts/:thoughtId', async (req, res) => {
   try {
-    const deletedThought = await Thought.findByIdAndDelete(req.params.thoughtId);
+    const thoughtId = req.params.thoughtId;
+    const deletedThought = await Thought.findByIdAndDelete(thoughtId);
 
     if (!deletedThought) {
-      return res.status(404).json({ message: 'Thought not found' });
+      return res.status(404).json({ success: false, error: 'Thought not found' });
     }
 
-    // Remove the thought's _id from the associated user's thoughts array field
+    const userId = deletedThought.userId;
     const user = await User.findByIdAndUpdate(
-      deletedThought.userId,
-      { $pull: { thoughts: req.params.thoughtId } },
+      userId,
+      { $pull: { thoughts: thoughtId } },
       { new: true }
     );
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ success: false, error: 'User not found' });
     }
 
-    res.json(deletedThought);
+    res.json({ success: true, data: deletedThought });
   } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
+    handleErrors(res, error);
   }
-  
 });
+
 
 
 
