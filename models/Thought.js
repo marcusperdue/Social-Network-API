@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
 
+function dateFormat(timestamp) {
+  
+  return timestamp.toLocaleString();  
+}
+
 const thoughtSchema = new mongoose.Schema({
   thoughtText: {
     type: String,
     required: true,
-    minLength: 1,
-    maxLength: 280,
+    minlength: 1,  
+    maxlength: 280,
   },
   createdAt: {
     type: Date,
     default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
+    get: (timestamp) => dateFormat(timestamp), 
   },
   username: {
     type: String,
@@ -24,7 +29,6 @@ const thoughtSchema = new mongoose.Schema({
   ],
 });
 
-// Define a virtual for reactionCount
 thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
