@@ -1,17 +1,11 @@
 const express = require('express');
-const apiRoutes = require('./routes/api');
 const db = require('./config/connection');
+const apiRoutes = require('./routes/index');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-
-// Combine apiRoutes and userRoutes into a single router
-const combinedRoutes = express.Router();
-combinedRoutes.use('/api', apiRoutes);
- 
-
-app.use(combinedRoutes);
+app.use(apiRoutes);
 
 db.on('error', (err) => {
   console.error(`MongoDB Connection Error: ${err}`);
