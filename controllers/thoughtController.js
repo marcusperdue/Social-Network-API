@@ -1,7 +1,9 @@
+// Thought Controller
 const { User, Thought } = require('../models');
 
 const thoughtController = {
 
+  // Get all thoughts
   getAllThoughts: async (req, res) => {
     try {
       const thoughts = await Thought.find();
@@ -12,6 +14,7 @@ const thoughtController = {
     }
   },
 
+  // Get a thought by ID
   getThoughtById: async (req, res) => {
     try {
       const thought = await Thought.findById(req.params.thoughtId);
@@ -25,7 +28,7 @@ const thoughtController = {
     }
   },
   
-
+  // Create a new thought
   createThought: async (req, res) => {
     try {
       const { userId } = req.body;
@@ -50,7 +53,6 @@ const thoughtController = {
         res.json(newThought);
       } catch (error) {
         if (error.name === 'CastError') {
-          // Handle the CastError here and respond with a custom message
           return res.status(400).json({ message: 'Invalid username or ID' });
         }
         throw error; 
@@ -61,7 +63,7 @@ const thoughtController = {
     }
   },
 
-
+  // Update a thought by ID
   updateThoughtById: async (req, res) => {
     try {
       const updatedThought = await Thought.findByIdAndUpdate(
@@ -79,6 +81,7 @@ const thoughtController = {
     }
   },
 
+  // Delete a thought by ID
   deleteThoughtById: async (req, res) => {
     try {
       const deletedThought = await Thought.findByIdAndDelete(req.params.thoughtId);
@@ -92,6 +95,7 @@ const thoughtController = {
     }
   },
 
+  // Create a reaction for a thought
   createReaction: async (req, res) => {
     try {
       const thought = await Thought.findById(req.params.thoughtId);
@@ -108,6 +112,7 @@ const thoughtController = {
     }
   },
   
+  // Remove a reaction from a thought
   removeReaction: async (req, res) => {
     try {
       const thoughtId = req.params.thoughtId;

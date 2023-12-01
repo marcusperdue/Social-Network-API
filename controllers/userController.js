@@ -1,3 +1,4 @@
+//User Controller
 const { User, Thought } = require('../models');
 
 

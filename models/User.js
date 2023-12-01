@@ -1,3 +1,4 @@
+// User Schema and Model
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
@@ -45,6 +46,7 @@ userSchema
     return this.friends.length;
   });
 
+// Create the User model
 const User = model("User", userSchema);
 
 module.exports = User;

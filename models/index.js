@@ -1,4 +1,4 @@
-//models/index.js
+ // Main Application Models
 const User = require('./User');
 const Thought = require('./Thought');
 

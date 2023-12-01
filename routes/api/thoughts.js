@@ -1,3 +1,4 @@
+// Thought Routes Configuration
 const router = require('express').Router();
 const thoughtController = require('../../controllers/thoughtController');
 

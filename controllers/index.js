@@ -1,3 +1,4 @@
+// Main Application Controllers
 const userController = require('./userController');
 const thoughtController = require('./thoughtController');
  

@@ -1,9 +1,12 @@
+// Thought and Reaction Schemas
 const mongoose = require('mongoose');
 
+// Function to format timestamps
 function dateFormat(timestamp) {
   return timestamp.toLocaleString();  
 }
 
+// Define the reaction schema
 const reactionSchema = new mongoose.Schema({
   reactionId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +28,7 @@ const reactionSchema = new mongoose.Schema({
   },
 });
 
+// Define the thought schema
 const thoughtSchema = new mongoose.Schema({
   thoughtText: {
     type: String,
@@ -44,10 +48,12 @@ const thoughtSchema = new mongoose.Schema({
   reactions: [reactionSchema], 
 });
 
+// Define a virtual property for reaction count
 thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
 
+// Create the Thought model
 const Thought = mongoose.model('Thought', thoughtSchema);
 
 module.exports = Thought;

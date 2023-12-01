@@ -1,3 +1,4 @@
+// Main Server Configuration
 const express = require('express');
 const mongoose = require('mongoose');
 const apiRoutes = require('./routes/index');
