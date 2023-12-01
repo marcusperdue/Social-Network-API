@@ -6,7 +6,15 @@ const userController = {
   getAllUsers: async (req, res) => {
     try {
       const users = await User.find();
-      res.json(users);
+      const usersWithThoughts = [];
+  
+      for (const user of users) {
+        const thoughts = await Thought.find({ username: user.username }).select('-__v');
+        user.thoughts = thoughts;
+        usersWithThoughts.push(user);
+      }
+  
+      res.json(usersWithThoughts);
     } catch (error) {
       console.error(error);
       res.status(500).json(error);

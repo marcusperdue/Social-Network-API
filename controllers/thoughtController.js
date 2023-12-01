@@ -1,4 +1,4 @@
-const { Thought } = require('../models');
+const { User, Thought } = require('../models');
 
 const thoughtController = {
 
@@ -28,25 +28,39 @@ const thoughtController = {
 
   createThought: async (req, res) => {
     try {
-      // Assuming you have the userId available in the request, you can add it to the thought data
       const { userId } = req.body;
       
       if (!userId) {
         return res.status(400).json({ message: 'userId is required' });
       }
+
+      try {
+        // Check if the user with the provided userId exists
+        const user = await User.findById(userId);
+        if (!user) {
+          return res.status(404).json({ message: 'Wrong match: User not found' });
+        }
   
-      // Create a new thought with the userId
-      const newThought = await Thought.create({
-        ...req.body, // Copy the existing thought data from the request
-        userId, // Add the userId to the thought
-      });
+        // Create a new thought with the userId
+        const newThought = await Thought.create({
+          ...req.body, 
+          userId, 
+        });
   
-      res.json(newThought);
+        res.json(newThought);
+      } catch (error) {
+        if (error.name === 'CastError') {
+          // Handle the CastError here and respond with a custom message
+          return res.status(400).json({ message: 'Invalid username or ID' });
+        }
+        throw error; 
+      }
     } catch (error) {
       console.error(error);
       res.status(500).json(error);
     }
   },
+
 
   updateThoughtById: async (req, res) => {
     try {
