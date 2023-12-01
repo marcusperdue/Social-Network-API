@@ -89,12 +89,11 @@ To install and run this API on your local machine, follow these steps:
 - **DELETE a friend**: `http://localhost:3001/api/:userId/friends/:friendId`
 
 
-## Demo
+# Demo
+![Demo](/assets/images/screenshot.png)
 
-![Demo](/assets/images/Screenshot%202023-11-30%20at%204.44.45%20PM.png)
 
 Watch the [DEMO VIDEO](https://example.com/demo-video) to see how the API works.
-
 
 ## License
 
