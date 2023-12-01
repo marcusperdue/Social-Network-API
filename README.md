@@ -37,7 +37,7 @@ To install and run this API on your local machine, follow these steps:
 
 4. Ensure you have MongoDB installed and running on your local machine.
 
-5. Start the Express.js server:
+5. Start the Express.js server.
 
 6. The API will be available at http://localhost:3001 by default.
 
@@ -90,10 +90,10 @@ To install and run this API on your local machine, follow these steps:
 
 
 # Demo
-![Demo](/assets/images/screenshot.png)
+[![Demo](/assets/images/screenshot.png)](https://drive.google.com/file/d/1UYF7nTwWMVYwAT6J4YKFZASeVGa9xqQf/view)
 
 
-Watch the [DEMO VIDEO](https://example.com/demo-video) to see how the API works.
+Watch the [DEMO VIDEO](https://drive.google.com/file/d/1UYF7nTwWMVYwAT6J4YKFZASeVGa9xqQf/view) to see how the API works.
 
 ## License
 

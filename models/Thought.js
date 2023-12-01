@@ -41,7 +41,7 @@ const thoughtSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reactions: [reactionSchema], // Include the Reaction schema as a subdocument
+  reactions: [reactionSchema], 
 });
 
 thoughtSchema.virtual('reactionCount').get(function () {
